@@ -54,7 +54,7 @@ function ProductCard({ data, onPress, favoriteScreen }: IProductCard) {
                 source={{ uri: data?.image }}
                 contentFit="contain"
                 placeholder={{ blurhash }}
-                alt={data?.title ?? "Without title"}
+                alt={data?.title ?? data?.description ?? "Product image"}
             />
             <S.TopBadgesContainer>
                 <S.FavoriteButton
