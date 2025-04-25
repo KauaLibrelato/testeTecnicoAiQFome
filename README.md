@@ -2,7 +2,7 @@
 
 Um aplicativo React Native para visualização de "produtos" usando a API FakeStore, com favoritar itens e simulação de compra.
 
-![WhatsAppVideo2025-04-24at22 15 19-ezgif com-video-to-gif-converter (1)](https://github.com/user-attachments/assets/58e4eca4-0d6a-477c-babd-d23d43d39396)
+<img src="https://github.com/user-attachments/assets/58e4eca4-0d6a-477c-babd-d23d43d39396" width="300" height="650" alt="Gif funcionamento do Aplicativo">
 
 ## 📌 Features
 
