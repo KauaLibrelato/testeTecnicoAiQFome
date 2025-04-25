@@ -8,7 +8,7 @@ export const Header = styled.View`
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    margin-top: ${Platform.OS === "ios" ? initialWindowMetrics?.insets.top : 32}px;
+    margin-top: ${Platform.OS === "ios" ? initialWindowMetrics?.insets.top : 40}px;
 `;
 
 export const HeaderButton = styled.TouchableOpacity.attrs({

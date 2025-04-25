@@ -1,8 +1,7 @@
 import AntDesign from "@expo/vector-icons/AntDesign";
 import { useNavigation, useRoute } from "@react-navigation/native";
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Animated, View } from "react-native";
-import { toast } from "sonner-native";
 import { useTheme } from "styled-components/native";
 
 import { Button, Text } from "../../components";
@@ -13,14 +12,13 @@ import { capitalizeFirstLetter, formatCurrency } from "../../utils/functions";
 import { IProduct } from "../../utils/types";
 
 import * as S from "./DetailsStyles";
+import { Header } from "./components/Header/Header";
 export function Details() {
     const params = useRoute().params as { data: IProduct };
     const theme = useTheme();
     const navigation = useNavigation<NavigationProps>();
     const scrollY = useRef(new Animated.Value(0)).current;
-    const { addFavoriteProduct, removeFavoriteProduct, favoriteProducts } = useStore(
-        (state) => state,
-    );
+    const { favoriteProducts } = useStore((state) => state);
     const [isFavorite, setIsFavorite] = useState(
         favoriteProducts?.some((favProduct) => favProduct.id === params.data.id),
     );
@@ -30,66 +28,19 @@ export function Details() {
         extrapolate: "clamp",
     });
 
-    const borderOpacity = scrollY.interpolate({
-        inputRange: [100, 250],
-        outputRange: [0, 1],
-        extrapolate: "clamp",
-    });
-
-    const handleFavoritePress = useCallback(() => {
-        try {
-            setIsFavorite((prev) => {
-                const newState = !prev;
-                if (newState) {
-                    addFavoriteProduct(params.data);
-                    toast.success("Product added to favorites!", {
-                        richColors: true,
-                    });
-                } else {
-                    removeFavoriteProduct(params.data.id);
-                    toast.error("Product removed from favorites!", {
-                        richColors: true,
-                    });
-                }
-                return newState;
-            });
-        } catch {
-            toast.error("Error toggling favorite product", {
-                richColors: true,
-            });
-        }
-    }, [addFavoriteProduct, params.data, removeFavoriteProduct]);
-
     useEffect(() => {
         navigation.setOptions({
             header: () => (
-                <S.Header>
-                    <S.HeaderContent>
-                        <S.HeaderButton onPress={() => navigation.goBack()}>
-                            <AntDesign name="left" size={32} color={theme.colors.purple} />
-                        </S.HeaderButton>
-                        <S.HeaderButton onPress={handleFavoritePress} testID="favorite-button">
-                            <AntDesign
-                                name={isFavorite ? "heart" : "hearto"}
-                                size={32}
-                                color={theme.colors.purple}
-                            />
-                        </S.HeaderButton>
-                    </S.HeaderContent>
-
-                    <S.HeaderBorder style={{ opacity: borderOpacity }} />
-                </S.Header>
+                <Header
+                    scrollY={scrollY}
+                    isFavorite={isFavorite}
+                    setIsFavorite={setIsFavorite}
+                    data={params?.data}
+                />
             ),
             headerTitle: "",
         });
-    }, [
-        borderOpacity,
-        handleFavoritePress,
-        isFavorite,
-        navigation,
-        theme.colors.purple,
-        theme.colors.primary,
-    ]);
+    }, [isFavorite, navigation, scrollY, params?.data]);
 
     return (
         <>

@@ -21,7 +21,7 @@ export const HeaderContent = styled.View`
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    margin-top: ${Platform.OS === "ios" ? initialWindowMetrics?.insets.top : 32}px;
+    margin-top: ${Platform.OS === "ios" ? initialWindowMetrics?.insets.top : 40}px;
 `;
 
 export const HeaderButton = styled.TouchableOpacity.attrs({
@@ -41,7 +41,7 @@ export const HeaderBorder = styled(Animated.View)`
     left: 0;
     right: 0;
     height: 1px;
-    background-color: ${({ theme }: ITheme) => theme.colors.disabled};
+    background-color: ${({ theme }: ITheme) => theme.colors.purple};
 `;
 
 export const ImageContainer = styled.View``;
