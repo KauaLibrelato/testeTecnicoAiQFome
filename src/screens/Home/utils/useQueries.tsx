@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 
-import { getFavoritesProducts, getProducts } from "../../../services/Products";
+import { getFavoritesProducts, getProducts } from "../../../services/products";
 import { useStore } from "../../../store/store";
 import { IProduct } from "../../../utils/types";
 
@@ -11,8 +11,7 @@ export function useQueries() {
         staleTime: 1000 * 60 * 5,
         queryFn: async () => {
             const products = await getProducts();
-
-            const parsedFavorites = await getFavoritesProducts();
+            const parsedFavorites = (await getFavoritesProducts()) ?? [];
 
             const productsWithFavoriteStatus = products?.map((product: IProduct) => {
                 const isFavorite = parsedFavorites.some(

@@ -14,10 +14,13 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 import { Toaster } from "sonner-native";
 
 import { RootStack } from "./src/routes";
+import { asyncStorage } from "./src/services/storage/asyncStorage";
+import { initializeStorageService } from "./src/services/storage/storageService";
 import { ThemeProvider } from "./src/theme/Theme";
 
 export default function App() {
     const queryClient = new QueryClient();
+    initializeStorageService(asyncStorage);
     const [fontsLoaded] = useFonts({
         Inter_400Regular,
         Inter_500Medium,

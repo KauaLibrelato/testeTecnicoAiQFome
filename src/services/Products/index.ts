@@ -1,7 +1,6 @@
-import AsyncStorage from "@react-native-async-storage/async-storage";
-
 import { axiosAdapter } from "../../infra";
 import { IProduct } from "../../utils/types";
+import { storageService } from "../storage/storageService";
 
 export async function getProducts() {
     const { response } = await axiosAdapter<IProduct[]>({
@@ -13,7 +12,6 @@ export async function getProducts() {
 }
 
 export async function getFavoritesProducts() {
-    const response = await AsyncStorage.getItem("@favoriteProducts");
-    const parsedFavorites: IProduct[] = response ? JSON.parse(response) : [];
-    return parsedFavorites;
+    const favorites = await storageService.getItem<IProduct[]>("@favoriteProducts");
+    return favorites;
 }

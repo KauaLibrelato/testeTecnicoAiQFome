@@ -1,6 +1,7 @@
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import React, { createContext, ReactNode, useEffect, useState } from "react";
 import { ThemeProvider as StyledThemeProvider } from "styled-components/native";
+
+import { storageService } from "../services/storage/storageService";
 
 import { themes } from "./utils/constants";
 import { ThemeType } from "./utils/enums";
@@ -17,7 +18,7 @@ export const ThemeProvider = ({ children }: { children: ReactNode }) => {
     }, []);
 
     async function loadTheme() {
-        const savedTheme = await AsyncStorage.getItem("@theme");
+        const savedTheme = await storageService.getItem("@theme");
         if (savedTheme) {
             setTheme(savedTheme as ThemeType);
         }
