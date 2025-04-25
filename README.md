@@ -50,9 +50,10 @@ Um aplicativo React Native para visualização de "produtos" usando a API FakeSt
     ```
 
 3. **Variáveis de ambiente**
-  ```bash
-    API_URL=https://fakestoreapi.com/
- ```
+
+```bash
+  API_URL=https://fakestoreapi.com/
+```
 
 ## ⚙️ Executando o projeto
 
@@ -93,6 +94,7 @@ Um aplicativo React Native para visualização de "produtos" usando a API FakeSt
     ├── routes/          # Configuração de navegação e rotas
     ├── screens/         # Telas/páginas do aplicativo
     ├── services/        # Integrações com API e serviços externos
+    ├── store/           # Arquivos principais que definem os estados e as funções de alteração de estado para a store do Zustand.
     ├── theme/           # Estilos globais, temas e configurações de design
     ├── utils/           # Utilitários, helpers e funções auxiliares
     ```
@@ -130,7 +132,7 @@ Um aplicativo React Native para visualização de "produtos" usando a API FakeSt
 #### 3. Tela de Favoritos
 
 - Listagem de produtos favoritos
-- Opção de navageção para detalhes ou tela inicial
+- Opção de navegação para detalhes ou tela inicial
 
 ## 📄 Licença
 
