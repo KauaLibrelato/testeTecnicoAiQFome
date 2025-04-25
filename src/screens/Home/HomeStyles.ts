@@ -8,7 +8,7 @@ export const Header = styled.View`
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    margin-top: ${Platform.OS === "ios" ? (initialWindowMetrics?.insets.top ?? 0) / 2 : 0}px;
+    margin-top: ${Platform.OS === "ios" ? (initialWindowMetrics?.insets.top ?? 0) / 2 : 16}px;
 `;
 
 export const IconsContainer = styled.View`

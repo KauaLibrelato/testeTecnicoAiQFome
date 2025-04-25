@@ -21,7 +21,7 @@ export const HeaderContent = styled.View`
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    margin-top: ${Platform.OS === "ios" ? initialWindowMetrics?.insets.top : 8}px;
+    margin-top: ${Platform.OS === "ios" ? initialWindowMetrics?.insets.top : 32}px;
 `;
 
 export const HeaderButton = styled.TouchableOpacity.attrs({

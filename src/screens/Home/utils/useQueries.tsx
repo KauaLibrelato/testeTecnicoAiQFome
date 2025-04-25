@@ -1,7 +1,6 @@
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useQuery } from "@tanstack/react-query";
 
-import { getProducts } from "../../../services/Products";
+import { getFavoritesProducts, getProducts } from "../../../services/Products";
 import { useStore } from "../../../store/store";
 import { IProduct } from "../../../utils/types";
 
@@ -13,10 +12,7 @@ export function useQueries() {
         queryFn: async () => {
             const products = await getProducts();
 
-            const favoriteProducts = await AsyncStorage.getItem("@favoriteProducts");
-            const parsedFavorites: IProduct[] = favoriteProducts
-                ? JSON.parse(favoriteProducts)
-                : [];
+            const parsedFavorites = await getFavoritesProducts();
 
             const productsWithFavoriteStatus = products?.map((product: IProduct) => {
                 const isFavorite = parsedFavorites.some(

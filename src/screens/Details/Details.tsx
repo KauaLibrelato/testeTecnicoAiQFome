@@ -37,21 +37,27 @@ export function Details() {
     });
 
     const handleFavoritePress = useCallback(() => {
-        setIsFavorite((prev) => {
-            const newState = !prev;
-            if (newState) {
-                addFavoriteProduct(params.data);
-                toast.success("Product added to favorites!", {
-                    richColors: true,
-                });
-            } else {
-                removeFavoriteProduct(params.data.id);
-                toast.error("Product removed from favorites!", {
-                    richColors: true,
-                });
-            }
-            return newState;
-        });
+        try {
+            setIsFavorite((prev) => {
+                const newState = !prev;
+                if (newState) {
+                    addFavoriteProduct(params.data);
+                    toast.success("Product added to favorites!", {
+                        richColors: true,
+                    });
+                } else {
+                    removeFavoriteProduct(params.data.id);
+                    toast.error("Product removed from favorites!", {
+                        richColors: true,
+                    });
+                }
+                return newState;
+            });
+        } catch {
+            toast.error("Error toggling favorite product", {
+                richColors: true,
+            });
+        }
     }, [addFavoriteProduct, params.data, removeFavoriteProduct]);
 
     useEffect(() => {

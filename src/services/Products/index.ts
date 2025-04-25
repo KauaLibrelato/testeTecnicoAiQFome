@@ -1,3 +1,5 @@
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
 import { axiosAdapter } from "../../infra";
 import { IProduct } from "../../utils/types";
 
@@ -10,12 +12,8 @@ export async function getProducts() {
     return response;
 }
 
-export async function getProductById(id: string) {
-    const { response } = await axiosAdapter<IProduct>({
-        method: "get",
-        url: `products/${id}`,
-        errorTitle: "Error when fetching product by id",
-    });
-
-    return response;
+export async function getFavoritesProducts() {
+    const response = await AsyncStorage.getItem("@favoriteProducts");
+    const parsedFavorites: IProduct[] = response ? JSON.parse(response) : [];
+    return parsedFavorites;
 }

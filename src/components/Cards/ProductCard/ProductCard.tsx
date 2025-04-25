@@ -1,5 +1,5 @@
 import AntDesign from "@expo/vector-icons/AntDesign";
-import React, { memo } from "react";
+import React, { memo, useCallback } from "react";
 import { toast } from "sonner-native";
 import { useTheme } from "styled-components/native";
 
@@ -20,28 +20,37 @@ function ProductCard({ data, onPress, favoriteScreen }: IProductCard) {
 
     const isFavorite = favoriteProducts?.some((favProduct: IProduct) => favProduct.id === data.id);
 
-    const updateFavorites = async (productId: string, isFavorite: boolean) => {
-        if (isFavorite) {
-            addFavoriteProduct(data);
-            toast.success("Product added to favorites!", {
-                richColors: true,
-            });
-        } else {
-            removeFavoriteProduct(productId);
-            toast.error("Product removed from favorites!", {
-                richColors: true,
-            });
-        }
-    };
+    const updateFavorites = useCallback(
+        async (productId: string, isFavorite: boolean) => {
+            try {
+                if (isFavorite) {
+                    addFavoriteProduct(data);
+                    toast.success("Product added to favorites!", {
+                        richColors: true,
+                    });
+                } else {
+                    removeFavoriteProduct(productId);
+                    toast.error("Product removed from favorites!", {
+                        richColors: true,
+                    });
+                }
+            } catch {
+                toast.error("Erro ao atualizar favoritos. Tente novamente.", {
+                    richColors: true,
+                });
+            }
+        },
+        [addFavoriteProduct, removeFavoriteProduct, data],
+    );
 
-    const handleFavoritePress = async () => {
+    const handleFavoritePress = useCallback(async () => {
         if (favoriteScreen) {
             await updateFavorites(data.id, false);
         } else {
             const newFavoriteState = !isFavorite;
             await updateFavorites(data.id, newFavoriteState);
         }
-    };
+    }, [data.id, favoriteScreen, isFavorite, updateFavorites]);
 
     return (
         <S.Container

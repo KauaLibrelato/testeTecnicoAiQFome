@@ -20,7 +20,7 @@ export const useStore = create<ProductState>((set) => ({
     addFavoriteProduct: (product) => {
         set((state) => {
             const updatedFavorites = [...state.favoriteProducts, product];
-            AsyncStorage.setItem("@favoriteProducts", JSON.stringify(updatedFavorites)); // Persistir no AsyncStorage
+            AsyncStorage.setItem("@favoriteProducts", JSON.stringify(updatedFavorites));
             return { favoriteProducts: updatedFavorites };
         });
     },
@@ -29,7 +29,7 @@ export const useStore = create<ProductState>((set) => ({
             const updatedFavorites = state.favoriteProducts.filter(
                 (product) => product.id !== productId,
             );
-            AsyncStorage.setItem("@favoriteProducts", JSON.stringify(updatedFavorites)); // Persistir no AsyncStorage
+            AsyncStorage.setItem("@favoriteProducts", JSON.stringify(updatedFavorites));
             return { favoriteProducts: updatedFavorites };
         });
     },
