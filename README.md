@@ -52,6 +52,9 @@ Um aplicativo React Native para visualização de "produtos" usando a API FakeSt
     ```
 
 3. **Variáveis de ambiente**
+
+    - Criar o arquivo .env na raiz do projeto e colar o que está no bash abaixo
+      
     ```bash
     API_URL=https://fakestoreapi.com/
     ```
