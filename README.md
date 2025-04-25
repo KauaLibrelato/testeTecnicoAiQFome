@@ -1,6 +1,8 @@
 # Deafio Técino AIQFome/Magalu
 
-Um aplicativo React Native para visualização de "produtos" usando a API FakeStore, com simulação de compra de itens.
+Um aplicativo React Native para visualização de "produtos" usando a API FakeStore, com favoritar itens e simulação de compra.
+
+![WhatsAppVideo2025-04-24at22 15 19-ezgif com-video-to-gif-converter (1)](https://github.com/user-attachments/assets/58e4eca4-0d6a-477c-babd-d23d43d39396)
 
 ## 📌 Features
 
@@ -123,17 +125,25 @@ Um aplicativo React Native para visualização de "produtos" usando a API FakeSt
 - Logo da empresa
 - Listagem de produtos
 - Exibição de imagens e informações básicas
+  
+<img src="https://github.com/user-attachments/assets/48e2f762-ce0d-460b-b805-0d4f44f3c9a2](https://github.com/user-attachments/assets/71467d40-aac8-489c-bd95-f9f085a82295" width="300" height="650" alt="Tela de listagem">
+
+
 
 #### 2. Tela de Detalhes
 
 - Imagem em alta resolução
 - Metadados completos
 - Botão de compra com preço fictício
+  
+<img src="https://github.com/user-attachments/assets/5e850290-12e7-4a85-97c9-fa5e629b2b45" width="300" height="650" alt="Tela de detalhes">
 
 #### 3. Tela de Favoritos
 
 - Listagem de produtos favoritos
 - Opção de navegação para detalhes ou tela inicial
+  
+<img src="https://github.com/user-attachments/assets/1a3ad951-0e7e-43eb-9564-a99ed05c7e44" width="300" height="650" alt="Tela de favoritos">
 
 ## 📄 Licença
 
