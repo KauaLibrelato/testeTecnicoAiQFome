@@ -126,7 +126,7 @@ Um aplicativo React Native para visualização de "produtos" usando a API FakeSt
 - Listagem de produtos
 - Exibição de imagens e informações básicas
   
-<img src="https://github.com/user-attachments/assets/48e2f762-ce0d-460b-b805-0d4f44f3c9a2](https://github.com/user-attachments/assets/71467d40-aac8-489c-bd95-f9f085a82295" width="300" height="650" alt="Tela de listagem">
+<img src="https://github.com/user-attachments/assets/e09a2753-5e6a-41ea-a98c-c7ee09eb9aa75" width="300" height="650" alt="Tela de listagem">
 
 
 
