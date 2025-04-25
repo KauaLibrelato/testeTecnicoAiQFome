@@ -8,7 +8,7 @@ Um aplicativo React Native para visualização de "produtos" usando a API FakeSt
 
 - 🖼️ Listagem de produtos
 - 📱 Três telas principais: Listagem de produtos, Detalhes de produto e Favoritos
-- 💳 Simulação de compra com preços fictícios
+- 💳 Simulação de compra com preços
 - 🚀 Performance otimizada com cache e lazy loading
 - ⭐ Simulação de review do produto
 
@@ -127,12 +127,11 @@ Um aplicativo React Native para visualização de "produtos" usando a API FakeSt
 <img src="https://github.com/user-attachments/assets/e09a2753-5e6a-41ea-a98c-c7ee09eb9aa75" width="300" height="650" alt="Tela de listagem">
 
 
-
 #### 2. Tela de Detalhes
 
 - Imagem em alta resolução
 - Metadados completos
-- Botão de compra com preço fictício
+- Botão de compra com preço
   
 <img src="https://github.com/user-attachments/assets/5e850290-12e7-4a85-97c9-fa5e629b2b45" width="300" height="650" alt="Tela de detalhes">
 
