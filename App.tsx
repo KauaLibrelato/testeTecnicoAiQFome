@@ -42,10 +42,10 @@ export default function App() {
         <QueryClientProvider client={queryClient}>
             <GestureHandlerRootView style={{ flex: 1 }}>
                 <ThemeProvider>
+                    <StatusBar style="dark" backgroundColor="#fff" />
                     <SafeAreaProvider>
-                        <StatusBar style="dark" translucent backgroundColor="#fff" />
                         <RootStack />
-                        <Toaster />
+                        <Toaster duration={2000} position="bottom-center" />
                     </SafeAreaProvider>
                 </ThemeProvider>
             </GestureHandlerRootView>

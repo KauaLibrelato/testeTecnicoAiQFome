@@ -8,4 +8,8 @@ export const productMock: IProduct = {
     image: "https://example.com/product1.jpg",
     price: 19.99,
     isFavorite: false,
+    rating: {
+        rate: 3.5,
+        count: 50,
+    },
 };

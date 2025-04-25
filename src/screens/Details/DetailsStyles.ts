@@ -1,5 +1,5 @@
 import { Image as ExpoImage } from "expo-image";
-import { Animated } from "react-native";
+import { Animated, Platform } from "react-native";
 import { initialWindowMetrics } from "react-native-safe-area-context";
 import styled from "styled-components/native";
 
@@ -13,7 +13,7 @@ export const Container = styled.ScrollView.attrs({
 `;
 
 export const Header = styled(Animated.View)`
-    padding: 8px 0px;
+    padding: 0 8px;
     background-color: ${({ theme }: ITheme) => theme.colors.background};
 `;
 
@@ -21,13 +21,13 @@ export const HeaderContent = styled.View`
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    margin-top: ${Platform.OS === "ios" ? initialWindowMetrics?.insets.top : 8}px;
 `;
 
 export const HeaderButton = styled.TouchableOpacity.attrs({
     activeOpacity: 0.7,
 })`
     background-color: ${({ theme }: ITheme) => theme.colors.background};
-    margin-top: ${initialWindowMetrics?.insets.top ?? 32}px;
     width: 48px;
     height: 48px;
     border-radius: 24px;
@@ -73,7 +73,7 @@ export const Footer = styled.View`
     align-items: center;
     background-color: ${({ theme }: ITheme) => theme.colors.background};
     border-top-width: 1px;
-    border-top-color: ${({ theme }: ITheme) => theme.colors.disabled};
+    border-top-color: ${({ theme }: ITheme) => theme.colors.purple};
 `;
 
 export const ButtonContainer = styled.View`

@@ -1,3 +1,5 @@
+import { Platform } from "react-native";
+import { initialWindowMetrics } from "react-native-safe-area-context";
 import styled from "styled-components/native";
 
 import { ITheme } from "../../theme/utils/types";
@@ -6,6 +8,7 @@ export const Header = styled.View`
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    margin-top: ${Platform.OS === "ios" ? (initialWindowMetrics?.insets.top ?? 0) / 2 : 0}px;
 `;
 
 export const IconsContainer = styled.View`
@@ -19,7 +22,7 @@ export const IconButtonCount = styled.Text`
     position: absolute;
     top: -8px;
     right: -8px;
-    background-color: ${({ theme }: ITheme) => theme.colors.error};
+    background-color: ${({ theme }: ITheme) => theme.colors.purple};
     color: ${({ theme }: ITheme) => theme.colors.background};
     font-size: 12px;
     font-family: ${({ theme }: ITheme) => theme.fonts.bold};

@@ -1,4 +1,4 @@
-export interface ITheme {
+export interface IThemeForStyledComponents {
     colors: {
         primary: string;
         secondary: string;
@@ -17,4 +17,7 @@ export interface ITheme {
         semiBold: string;
         bold: string;
     };
+}
+export interface ITheme {
+    theme: IThemeForStyledComponents;
 }

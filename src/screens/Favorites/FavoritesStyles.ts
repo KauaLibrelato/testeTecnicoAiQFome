@@ -1,3 +1,4 @@
+import { Platform } from "react-native";
 import { initialWindowMetrics } from "react-native-safe-area-context";
 import styled from "styled-components/native";
 
@@ -7,18 +8,17 @@ export const Header = styled.View`
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    margin-top: ${Platform.OS === "ios" ? initialWindowMetrics?.insets.top : 8}px;
 `;
 
 export const HeaderButton = styled.TouchableOpacity.attrs({
     activeOpacity: 0.7,
 })`
     background-color: ${({ theme }: ITheme) => theme.colors.background};
-    margin-top: ${initialWindowMetrics?.insets.top ?? 32}px;
     width: 48px;
     height: 48px;
     border-radius: 24px;
     justify-content: center;
-    align-items: center;
 `;
 
 export const EmptyList = styled.View`

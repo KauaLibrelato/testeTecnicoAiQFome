@@ -1,12 +1,14 @@
 import AntDesign from "@expo/vector-icons/AntDesign";
 import { useNavigation, useRoute } from "@react-navigation/native";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { Animated, View } from "react-native";
+import { toast } from "sonner-native";
 import { useTheme } from "styled-components/native";
 
 import { Button, Text } from "../../components";
 import { EButtonType } from "../../infra";
 import { NavigationProps } from "../../routes/utils/types";
+import { useStore } from "../../store/store";
 import { capitalizeFirstLetter, formatCurrency } from "../../utils/functions";
 import { IProduct } from "../../utils/types";
 
@@ -16,7 +18,12 @@ export function Details() {
     const theme = useTheme();
     const navigation = useNavigation<NavigationProps>();
     const scrollY = useRef(new Animated.Value(0)).current;
-    const [isFavorite, setIsFavorite] = useState(params?.data?.isFavorite || false);
+    const { addFavoriteProduct, removeFavoriteProduct, favoriteProducts } = useStore(
+        (state) => state,
+    );
+    const [isFavorite, setIsFavorite] = useState(
+        favoriteProducts?.some((favProduct) => favProduct.id === params.data.id),
+    );
     const imageOpacity = scrollY.interpolate({
         inputRange: [0, 250],
         outputRange: [1, 0],
@@ -29,9 +36,23 @@ export function Details() {
         extrapolate: "clamp",
     });
 
-    const handleFavoritePress = () => {
-        setIsFavorite((prev) => !prev);
-    };
+    const handleFavoritePress = useCallback(() => {
+        setIsFavorite((prev) => {
+            const newState = !prev;
+            if (newState) {
+                addFavoriteProduct(params.data);
+                toast.success("Product added to favorites!", {
+                    richColors: true,
+                });
+            } else {
+                removeFavoriteProduct(params.data.id);
+                toast.error("Product removed from favorites!", {
+                    richColors: true,
+                });
+            }
+            return newState;
+        });
+    }, [addFavoriteProduct, params.data, removeFavoriteProduct]);
 
     useEffect(() => {
         navigation.setOptions({
@@ -45,7 +66,7 @@ export function Details() {
                             <AntDesign
                                 name={isFavorite ? "heart" : "hearto"}
                                 size={32}
-                                color={isFavorite ? theme.colors.error : theme.colors.purple}
+                                color={theme.colors.purple}
                             />
                         </S.HeaderButton>
                     </S.HeaderContent>
@@ -55,7 +76,14 @@ export function Details() {
             ),
             headerTitle: "",
         });
-    }, [borderOpacity, isFavorite, navigation, theme.colors.error, theme.colors.primary]);
+    }, [
+        borderOpacity,
+        handleFavoritePress,
+        isFavorite,
+        navigation,
+        theme.colors.purple,
+        theme.colors.primary,
+    ]);
 
     return (
         <>

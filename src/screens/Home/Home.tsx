@@ -1,14 +1,13 @@
 import AntDesign from "@expo/vector-icons/AntDesign";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
-import { useEffect, useState } from "react";
-import { FlatList } from "react-native";
+import { FlatList, RefreshControl } from "react-native";
 import { useTheme } from "styled-components/native";
 
 import Logo from "../../assets/svgs/logo.svg";
 import { Button, ScreenContent } from "../../components";
-import { ProductCard } from "../../components/Cards/ProductCard/ProductCard";
+import ProductCard from "../../components/Cards/ProductCard/ProductCard";
 import { NavigationProps } from "../../routes/utils/types";
+import { useStore } from "../../store/store";
 
 import * as S from "./HomeStyles";
 import { useQueries } from "./utils/useQueries";
@@ -16,22 +15,8 @@ import { useQueries } from "./utils/useQueries";
 export function Home() {
     const navigation = useNavigation<NavigationProps>();
     const theme = useTheme();
-    const { data, isLoading, refetch } = useQueries();
-    const [favoriteCount, setFavoriteCount] = useState(0);
-
-    async function getFavoritesCount() {
-        const response = await AsyncStorage.getItem("@favoriteProducts");
-        const favorites = response ? JSON.parse(response) : null;
-        if (favorites) {
-            setFavoriteCount(favorites.length);
-        } else {
-            setFavoriteCount(0);
-        }
-    }
-
-    useEffect(() => {
-        getFavoritesCount();
-    }, []);
+    const { isLoading, refetch, isRefetching } = useQueries();
+    const { products, favoriteProducts } = useStore((state) => state);
 
     return (
         <ScreenContent>
@@ -40,10 +25,9 @@ export function Home() {
                 <S.IconsContainer>
                     <S.IconButton onPress={() => navigation.navigate("Favorites")}>
                         <AntDesign name="hearto" size={32} color={theme.colors.purple} />
-                        {favoriteCount > 0 && <S.IconButtonCount>0</S.IconButtonCount>}
-                    </S.IconButton>
-                    <S.IconButton>
-                        <AntDesign name="shoppingcart" size={32} color={theme.colors.purple} />
+                        {favoriteProducts?.length > 0 && (
+                            <S.IconButtonCount>{favoriteProducts?.length}</S.IconButtonCount>
+                        )}
                     </S.IconButton>
                 </S.IconsContainer>
             </S.Header>
@@ -55,7 +39,14 @@ export function Home() {
             )}
 
             <FlatList
-                data={data?.products}
+                refreshControl={
+                    <RefreshControl
+                        refreshing={isRefetching}
+                        onRefresh={() => refetch()}
+                        colors={[theme.colors.purple]}
+                    />
+                }
+                data={products}
                 renderItem={({ item: product }) => (
                     <ProductCard
                         data={product}
@@ -67,6 +58,7 @@ export function Home() {
                 numColumns={2}
                 contentContainerStyle={{
                     alignItems: "center",
+                    paddingBottom: 32,
                 }}
                 ListEmptyComponent={() =>
                     !isLoading && (

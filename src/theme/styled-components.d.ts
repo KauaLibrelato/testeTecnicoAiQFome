@@ -1,6 +1,6 @@
 import "styled-components/native";
-import { ITheme } from "./utils/types";
+import { IThemeForStyledComponents } from "./utils/types";
 
 declare module "styled-components/native" {
-    export interface DefaultTheme extends ITheme {}
+    export interface DefaultTheme extends IThemeForStyledComponents {}
 }

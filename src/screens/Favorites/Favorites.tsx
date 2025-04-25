@@ -4,17 +4,16 @@ import { FlatList } from "react-native";
 import { useTheme } from "styled-components/native";
 
 import { ScreenContent, Text } from "../../components";
-import { ProductCard } from "../../components/Cards/ProductCard/ProductCard";
+import ProductCard from "../../components/Cards/ProductCard/ProductCard";
 import { NavigationProps } from "../../routes/utils/types";
+import { useStore } from "../../store/store";
 
 import * as S from "./FavoritesStyles";
-import { useQueries } from "./utils/useQueries";
 
 export function Favorites() {
     const navigation = useNavigation<NavigationProps>();
     const theme = useTheme();
-    const { data, isLoading } = useQueries();
-
+    const { favoriteProducts } = useStore((state) => state);
     return (
         <ScreenContent>
             <S.Header>
@@ -23,13 +22,7 @@ export function Favorites() {
                 </S.HeaderButton>
             </S.Header>
 
-            {isLoading && (
-                <S.LoadingContainer>
-                    <S.LoadingIndicator size="large" color={theme.colors.purple} />
-                </S.LoadingContainer>
-            )}
-
-            {data?.products.length && (
+            {favoriteProducts?.length && (
                 <S.TitleContainer>
                     <Text fontSize={24} fontFamily={theme.fonts.bold} color={theme.colors.primary}>
                         Favorites
@@ -38,33 +31,29 @@ export function Favorites() {
             )}
 
             <FlatList
-                data={data?.products}
+                data={favoriteProducts}
                 renderItem={({ item: product }) => (
                     <ProductCard
                         data={product}
                         onPress={() => navigation.navigate("Details", { data: product })}
+                        favoriteScreen
                     />
                 )}
+                contentContainerStyle={{ paddingBottom: 32 }}
                 keyExtractor={(item) => item.id.toString()}
                 showsVerticalScrollIndicator={false}
-                numColumns={2}
-                contentContainerStyle={{
-                    alignItems: "center",
-                }}
-                ListEmptyComponent={() =>
-                    !isLoading && (
-                        <S.EmptyList>
-                            <AntDesign name="frowno" size={32} color={theme.colors.purple} />
-                            <Text
-                                fontSize={16}
-                                fontFamily={theme.fonts.bold}
-                                color={theme.colors.purple}
-                            >
-                                You don't have any favorite products yet.
-                            </Text>
-                        </S.EmptyList>
-                    )
-                }
+                ListEmptyComponent={() => (
+                    <S.EmptyList>
+                        <AntDesign name="frowno" size={32} color={theme.colors.purple} />
+                        <Text
+                            fontSize={16}
+                            fontFamily={theme.fonts.bold}
+                            color={theme.colors.purple}
+                        >
+                            You don't have any favorite products yet.
+                        </Text>
+                    </S.EmptyList>
+                )}
             />
         </ScreenContent>
     );

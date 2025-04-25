@@ -13,7 +13,9 @@ export const axiosAdapter = async <T>({ method, url, data, query, errorTitle }: 
             data,
         });
     } catch (error) {
-        toast.error(errorTitle);
+        toast.error(errorTitle, {
+            richColors: true,
+        });
         axiosResponse = undefined;
         const err = error as AxiosError<{ message: string }>;
         throw err;
