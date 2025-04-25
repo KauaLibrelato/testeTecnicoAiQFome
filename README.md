@@ -71,7 +71,7 @@ Um aplicativo React Native para visualização de "produtos" usando a API FakeSt
     i # Clicar na tecla "I" do teclado dentro do terminal faz abrir diretamente pelo emulador Ios
     ```
 
-## 🧪 Testes (x% de cobertura)
+## 🧪 Testes (88.05% de cobertura)
 
 1. Para executar testes com e sem relatório de cobertura
     ```bash
@@ -79,6 +79,8 @@ Um aplicativo React Native para visualização de "produtos" usando a API FakeSt
     # Para ver cobertura dos testes
     yarn test --coverage
     ```
+    ![image](https://github.com/user-attachments/assets/90279979-415a-4cac-8c2a-6b8723c3630c)
+
 
 ## 📂 Estrutura do Projeto
 
